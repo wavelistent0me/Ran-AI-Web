@@ -1,15 +1,9 @@
 <template>
   <div class="appWrapper">
-    <div
-      class="appInner"
-      :class="
-        store && store.getters && store.getters.themeInfo.className
-          ? store.getters.themeInfo.className
-          : null
-      "
-    >
+    <div class="appInner" :class="store && store.getters && store.getters.themeInfo.className? store.getters.themeInfo.className: null">
+      <!--Header-->
       <NavigationBar />
-
+      <!--Content-->
       <LeftNavigationBar />
 
 <!--      <levitation-ball class="hidden-xs-only" />-->

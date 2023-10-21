@@ -1,14 +1,13 @@
-  <template>
+<template>
   <div class="NavigationBar">
+    <!--左边-->
     <div :class="controlDisplay?'leftNavigation':'leftNavigation_active'" v-if="isLeftMenu">
       <el-avatar
           class="headPortrait"
           :size="70"
           :icon="UserFilled"
           :src="
-          store.getters.userinfo.avatar
-            ? imageUrl + store.getters.userinfo.avatar
-            : require('../assets/logoHead.svg')
+          store.getters.userinfo.avatar? imageUrl + store.getters.userinfo.avatar: require('../assets/logoHead.svg')
         "
       />
       <div class="surplus" v-if="store.getters.userinfo">
@@ -47,6 +46,7 @@
         {{ controlDisplay ? '隐藏' : '显示' }}
       </div>
     </div>
+    <!--右边-->
     <div class="rightContent">
       <RouterView v-slot="{ Component }">
         <!-- TODO 要缓存 -->
@@ -104,9 +104,14 @@ export default defineComponent({
     let isHeadNavigation = ref(false);
     let navigationList = ref([
       {
-        title: "智能问答",
+        title: "阴阳怪气",
         icon: ChatDotSquare,
         to: "/",
+      },
+      {
+        title: "智能问答",
+        icon: ChatDotSquare,
+        to: "/dialogue",
       },
       {
         title: "预设角色",

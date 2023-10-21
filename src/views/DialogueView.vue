@@ -1,22 +1,17 @@
 <template>
   <div class="body" ref="scrollRef">
+    <!--无对话界面-->
     <div v-if="!conversationList.length" class="explain">
       <img class="logo" alt="Vue logo" src="../assets/logo02.svg"/>
       <div class="expositoryCase">欢迎使用TIME SEA PLUS</div>
-      <div class="consume">
-        <el-icon>
-          <Goods/>
-        </el-icon>
+      <div class="consume"><el-icon><Goods/></el-icon>
         <div class="consumeText">每次提问消耗1个SUPER币</div>
       </div>
       <div class="beCareful">请注意不支持违法、违规等不当信息内容</div>
     </div>
+    <!--有对话界面-->
     <div v-else class="questions" style="margin: 20px 0">
-      <div
-          v-for="(item, index) in conversationList"
-          :key="index"
-          class="item slide-animation"
-      >
+      <div v-for="(item, index) in conversationList" :key="index" class="item slide-animation">
         <div class="question">
           <div>
             <div class="text">{{ item.user }}</div>
@@ -270,6 +265,7 @@ export default {
     const rate = ref(50);
     const memory = ref(10);
     const size = ref(1000);
+
     onMounted(() => {
       window.addEventListener("resize", handleResize);
       handleResize();
@@ -476,13 +472,8 @@ export default {
 
         console.log("发起websocket", model.value);
 
-        socket.value = new WebSocket(
-            process.env.VUE_APP_WSS +
-            "/gpt-web/api/" +
-            localStorage.getItem("token") +
-            "/" +
-            model.value
-        );
+        socket.value = new WebSocket(process.env.VUE_APP_WSS + "/gpt-web/api/"
+            + localStorage.getItem("token") + "/" + model.value + "/nomal");
         // TODO 建立连接
         socket.value.onopen = function () {
           socket.value.send(JSON.stringify(messages));
@@ -507,9 +498,10 @@ export default {
             message: "登录信息已过期,请重新登录",
             type: "error",
           });
-          localStorage.removeItem("token");
-          localStorage.removeItem("user");
-          location.reload();
+
+          //localStorage.removeItem("token");
+          //localStorage.removeItem("user");
+          //location.reload();
         };
       }
     }

@@ -1,14 +1,13 @@
 <template>
   <nav class="header">
+    <!--左边-->
     <div class="header-side">
-      <div
-        @click="appletDialogVisible = true"
-        class="rechargeButton hidden-xs-only applet"
-      >
+      <div @click="appletDialogVisible = true" class="rechargeButton hidden-xs-only applet" v-if="isHeadNavigation">
         <img class="appletIcon" :src="require('../assets/applet.svg')" />
         <div class="rechargeButtonText themeColorText">微信小程序</div>
       </div>
     </div>
+    <!--中间-->
     <div v-if="isHeadNavigation" class="header-center">
       <div class="switch-button">
         <block v-for="(item, index) in navigationList" :key="index">
@@ -21,11 +20,8 @@
         </block>
       </div>
     </div>
-
-    <div
-      class="header-side header-right"
-      style="display: flex; align-items: center"
-    >
+    <!--右边-->
+    <div class="header-side header-right" style="display: flex; align-items: center">
       <div @click="switchTheme" class="hidden-xs-only">
         <el-button text class="switchThemeIconWrapper">
           <template v-slot:icon>
@@ -34,14 +30,11 @@
               :class="{
                 show: store.getters.themeInfo.className === 'lightMode',
               }"
-              size="16"
-              ><Sunny
+              size="16"><Sunny
             /></el-icon>
             <el-icon
               class="IconInner Moon"
-              :class="{
-                show: store.getters.themeInfo.className !== 'lightMode',
-              }"
+              :class="{show: store.getters.themeInfo.className !== 'lightMode',}"
               size="16"
               ><Moon
             /></el-icon>
@@ -49,27 +42,13 @@
         </el-button>
       </div>
 
-      <div
-        v-if="store.getters.userinfo"
-        style="display: flex; align-items: center"
-      >
-        <div
-          @click="
-            router().push({
-              path: '/purchase',
-            })
-          "
-          class="hidden-xs-only"
-        >
-          <el-button text
-            >打赏
-
-            <template v-slot:icon>
+      <div v-if="store.getters.userinfo" style="display: flex; align-items: center">
+        <div @click="router().push({path: '/purchase',})" v-if="isHeadNavigation" class="hidden-xs-only">
+          <el-button text>打赏<template v-slot:icon>
               <el-icon size="16">
                 <Goods />
               </el-icon>
-            </template>
-          </el-button>
+            </template></el-button>
         </div>
         <div class="header-right">
           <div class="header-user-wrapper">
@@ -94,26 +73,11 @@
               </div>
               <template #dropdown>
                 <el-dropdown-menu class="dropdown-menu">
-                  <el-dropdown-item
-                    @click="router().push({ path: '/Admin' })"
-                    v-if="store.getters.userinfo.type === 'ADMIN'"
-                    >控制台</el-dropdown-item
-                  >
-                  <el-dropdown-item @click="router().push({ path: '/Orders' })"
-                    >打赏记录</el-dropdown-item
-                  >
-                  <el-dropdown-item
-                    @click="router().push({ path: '/Exchange' })"
-                    >兑换中心</el-dropdown-item
-                  >
-                  <el-dropdown-item @click="switchTheme"
-                    >切换到{{
-                      store.getters.themeInfo.switchText
-                    }}</el-dropdown-item
-                  >
-                  <el-dropdown-item divided @click="logout"
-                    >退出登录</el-dropdown-item
-                  >
+                  <el-dropdown-item @click="router().push({ path: '/Admin' })" v-if="store.getters.userinfo.type === 'ADMIN'">控制台</el-dropdown-item>
+                  <el-dropdown-item @click="router().push({ path: '/Orders' })" v-if="store.getters.userinfo.type === 'ADMIN'">打赏记录</el-dropdown-item>
+                  <el-dropdown-item @click="router().push({ path: '/Exchange' })" v-if="store.getters.userinfo.type === 'ADMIN'">兑换中心</el-dropdown-item>
+                  <el-dropdown-item @click="switchTheme">切换到{{store.getters.themeInfo.switchText }}</el-dropdown-item>
+                  <el-dropdown-item divided @click="logout">退出登录</el-dropdown-item>
                 </el-dropdown-menu>
               </template>
             </el-dropdown>
@@ -124,13 +88,7 @@
     </div>
   </nav>
 
-  <el-dialog
-    v-model="appletDialogVisible"
-    title="TIME SEA PLUS"
-    width="300"
-    center
-    align-center
-  >
+  <el-dialog v-model="appletDialogVisible" title="TIME SEA PLUS" width="300" center align-center>
     <div class="wxAppletCodeRow">
       <img class="wxAppletCode" :src="require('../assets/wxAppletCode.jpg')" />
       <div>微信扫一扫</div>

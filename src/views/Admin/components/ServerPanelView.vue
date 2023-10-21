@@ -18,20 +18,13 @@
         </el-form-item>
         <!---->
         <el-form-item label="增强GPT对话请求链" label-width="200px">
-          <el-input
-            placeholder="请设置增强GPT请求链"
-            clearable
-            v-model="form.openAiPlusUrl"
-          />
+          <el-input class="elInput" placeholder="请设置增强GPT请求链" clearable v-model="form.openAiPlusUrl"/>
+        </el-form-item>
+        <!---->
+        <el-form-item label="增强GPT对话密钥" label-width="200px">
+          <el-input class="elInput" placeholder="请设置密钥" clearable v-model="form.openPlusKey"/>
         </el-form-item>
 
-        <el-form-item label="增强GPT对话密钥" label-width="200px">
-          <el-input
-            placeholder="请设置密钥"
-            clearable
-            v-model="form.openPlusKey"
-          />
-        </el-form-item>
         <el-form-item label="必应密钥" label-width="200px">
           <el-input
             placeholder="请设置密钥"

@@ -1,16 +1,28 @@
 import {createRouter, createWebHashHistory} from 'vue-router'
 import {cancelArr} from "@/utils/BSideRequest";
 
-const routes = [{
-    path: '/',
-    name: 'Index',
-    component: () => import('../views/DialogueView.vue'),
-    meta: {
-        title: '智能问答', // TODO 浏览器标题
-        isHeadNavigation: true, // TODO 是否显示tab
-        keepAlive: true,
-        isLeftMenu: true
-    }
+const routes = [
+    {
+        path: '/',
+        name: 'Test',
+        component: () => import('../views/TestView.vue'),
+        meta: {
+            title: '阴阳怪气小助手', // TODO 浏览器标题
+            isHeadNavigation: false, // TODO 是否显示tab
+            keepAlive: true,
+            isLeftMenu: false
+        }
+    },
+    {
+        path: '/dialogue',
+        name: 'Index',
+        component: () => import('../views/DialogueView.vue'),
+        meta: {
+            title: '智能问答', // TODO 浏览器标题
+            isHeadNavigation: true, // TODO 是否显示tab
+            keepAlive: true,
+            isLeftMenu: true
+        }
     },
     {
         path: '/create',
@@ -194,7 +206,7 @@ router.beforeEach(async (to) => {
     })
 
     // TODO 设置浏览器Title
-    document.title = (to.meta.title ? to.meta.title : '') + ' - TIME SEA PLUS'
+    document.title = (to.meta.title ? to.meta.title : '') + ' - RanAI'
 })
 
 export default router

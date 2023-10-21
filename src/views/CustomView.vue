@@ -1,36 +1,22 @@
 <template>
   <div class="body" ref="scrollRef">
+    <!--无对话界面-->
     <div v-if="conversationList.length <= 1" class="explain">
-      <div class="logo">
-        {{ data.icon }}
-      </div>
+      <div class="logo">{{ data.icon }}</div>
       <div class="expositoryCase">{{ data.botInitialization }}</div>
       <div class="consume">
-        <el-icon>
-          <Goods />
-        </el-icon>
+        <el-icon><Goods /></el-icon>
         <div class="consumeText">每次提问消耗1个SUPER币</div>
       </div>
       <div class="beCareful">请注意不支持违法、违规等不当信息内容</div>
     </div>
+    <!--有对话界面-->
     <div v-else class="questions">
-      <div
-        v-for="(item, index) in conversationList"
-        :key="index"
-        class="item slide-animation"
-        v-show="index !== 0"
-      >
+      <div v-for="(item, index) in conversationList" :key="index" class="item slide-animation"
+           v-show="index !== 0">
         <div class="question">
-          <el-avatar
-            class="flexShrink"
-            :size="28"
-            :icon="UserFilled"
-            :src="
-              store.getters.userinfo.avatar
-                ? imageUrl + store.getters.userinfo.avatar
-                : require('../assets/my.png')
-            "
-          />
+          <el-avatar class="flexShrink" :size="28" :icon="UserFilled" :src="store.getters.userinfo.avatar? imageUrl + store.getters.userinfo.avatar: require('../assets/my.png')"/>
+
           <div class="text">{{ item.user }}</div>
         </div>
         <div class="answer">
@@ -121,6 +107,7 @@
       </div>
     </div>
   </div>
+
   <LoginDialog :show="loginVisible" @close="loginVisible = false" />
 </template>
 
@@ -172,6 +159,7 @@ export default {
     const rate = ref(50);
     const memory = ref(10);
     const size = ref(1000);
+
     onMounted(() => {
       if (store.getters.userinfo) getUser();
       //获取图片域名
